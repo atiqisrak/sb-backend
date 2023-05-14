@@ -17,7 +17,10 @@ dotenv.config();
 
 // Create an Express app
 const app = express();
-
+const allowedOrigins = [
+  "https://sardarbikesfrontend.vercel.app",
+  "http://localhost:3000",
+];
 // Middleware
 app.use(
   cors({
