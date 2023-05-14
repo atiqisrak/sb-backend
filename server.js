@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
+const cors = require("cors");
 
 // Import and use API routes
 const authRoutes = require("./routes/authRoutes");
@@ -18,7 +19,11 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://sardarbikes.vercel.app",
+  })
+);
 app.use(bodyParser.json());
 // Define a static directory to serve static files, such as images
 app.use(express.static("public"));
