@@ -21,7 +21,7 @@ const app = express();
 // Middleware
 app.use(
   cors({
-    origin: "https://sardarbikes.vercel.app",
+    origin: "https://sardarbikesfrontend.vercel.app",
   })
 );
 app.use(bodyParser.json());
