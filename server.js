@@ -17,16 +17,20 @@ dotenv.config();
 
 // Create an Express app
 const app = express();
+
+// Cors
 const allowedOrigins = [
   "https://sardarbikesfrontend.vercel.app",
   "http://localhost:3000",
 ];
+const corsOptions = {
+  origin: allowedOrigins,
+  // You can add more options here if needed
+};
+app.use(cors(corsOptions));
+
 // Middleware
-app.use(
-  cors({
-    origin: "https://sardarbikesfrontend.vercel.app",
-  })
-);
+
 app.use(bodyParser.json());
 // Define a static directory to serve static files, such as images
 app.use(express.static("public"));
