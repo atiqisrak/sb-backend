@@ -15,6 +15,7 @@ exports.getFeaturedProducts = async (req, res) => {
     const products = await Product.find({
       categories: "643d2bb3478bf149283e701c",
     });
+    
 
     res.json(products);
   } catch (err) {
@@ -22,6 +23,17 @@ exports.getFeaturedProducts = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch featured products" });
   }
 };
+
+exports.getFeaturedProductsList = async(req, res)=>{
+  try{
+    const products = await Product.find({"description.model": req.params.model})
+    res.status(200).json(products);
+  }catch(err){
+    res.status(500).json(err.message);
+  }
+}
+
+
 exports.addProduct = async (req, res) => {
   try {
     const {
@@ -107,7 +119,7 @@ exports.addProductsBulk = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
   try {
-    const { productId } = req.params;
+    const { productId } = req.params.productId;
     const updatedProductData = req.body;
 
     const product = await Product.findById(productId);
@@ -138,8 +150,8 @@ exports.updateProduct = async (req, res) => {
 
 exports.deleteProduct = async (req, res) => {
   try {
-    const { productId } = req.params;
-    const product = await Product.findById(productId);
+    const { productId } = req.params.productId;
+    const product = await Product.findByIdAndDelete(productId);
 
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
